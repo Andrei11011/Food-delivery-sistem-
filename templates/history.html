@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>History</title>
+    <style>
+        body {
+            font-family: Georgia, serif;
+            background-color: #f4f4f4;
+            margin: 8;
+            padding: 8;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #e7e7e7;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        p {
+            text-align: center;
+            color: #666;
+        }
+        .order {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        .btn {
+            display: block;
+            margin: 10px auto;
+            width: 30%;
+            padding: 10px;
+            background-color: #ff8267;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .btn:hover {
+            background-color: #0f9603;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Your order history</h1>
+        {% if orders %}
+            {% for order in orders %}
+                <div class="order">
+                    <p>Id: {{ order.id }}</p>
+                    <p>Items: {{ order.items }}</p>
+                    <p>Status: {{ order.status }}</p>
+                    <p>Address: {{ order.adress }}</p>
+                    <p>Phone Number: {{ order.phone_number }}</p>
+                    <hr>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>You have no orders</p>
+        {% endif %}
+        <a href="{{ url_for('menu') }}" class="btn">Continue Shopping</a>
+    </div>
+</body>
+</html>

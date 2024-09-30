@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu</title>
+    <style>
+        body {
+            font-family: Georgia, serif;
+            background-color: #f4f4f4;
+            margin: 8;
+            padding: 8;
+        }
+        .topnav {
+            overflow: hidden;
+            background-color: #ff8267;
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            width: 100%
+        }
+        .topnav a {
+            float: left;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+        .topnav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        .container {
+            font-family: cursive;
+            max-width: 800px;
+            margin: 250px auto;
+            padding: 20px;
+            background-color: #e7e7e7;
+            border-radius: 10px
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1)
+        }
+        .btn {
+            display: block;
+            margin: 20px;
+            width: 30%;
+            padding: 10px;
+            background-color: #ff8267;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .btn:hover {
+            background-color: #0f9603;
+        }
+
+        .deny {
+            font-family: cursive;
+            max-width: 800px;
+            margin: 250px auto;
+            padding: 20px;
+            background-color: #e7e7e7;
+            border-radius: 10px
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1)
+        }
+        .deny h1 {
+            text-align: center;
+        }
+        .deny a {
+            display: block;
+            margin: 20px auto;
+            width: 30%;
+            padding: 10px;
+            background-color: #ff8267;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .deny a:hover {
+            background-color: #0f9603;
+            color: black;
+        }
+
+
+    </style>
+</head>
+<body>
+    {% if logged_in %}
+        <div class="topnav">
+            <a href="homepage">Home</a>
+            <a href="menu">Menu</a>
+            <a href="history">History</a>
+            <a href="basket">Basket</a>
+            <a href="/logout">Logout</a>
+        </div>
+
+        <div class="container">
+            <h2>Paste</h2>
+            {% with messages = get_flashed_messages(with_categories = true) %}
+                {% if messages %}
+                    <div>
+                        {% for category, message in messages %}
+                            <div class="alert-{{category}}">{{message}}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+                <ul>
+                    <li>Tagliatelle cu pesto și ton (350 gr)......................30 lei</li>
+                        <p>tagliatelle, smântână lichidă, sos pesto, ton, parmezan</p>
+                        <form action="{{ url_for('add_to_basket') }}" method="POST">
+                            <input type="hidden" name="item_name" value="Tagliatelle cu pesto și ton">
+                            <input type="hidden" name="item_price" value="30">
+                            <button type="submit" class="btn">Add to Basket</button>
+                        </form>
+                    <li>Spaghetti Carbonara (350 gr)..............................29 lei</li>
+                        <p>spaghetti, bacon, smântână, ou, usturoi, condimente</p>
+                        <form action="{{ url_for('add_to_basket') }}" method="POST">
+                            <input type="hidden" name="item_name" value="Spaghetti Carbonara">
+                            <input type="hidden" name="item_price" value="29">
+                            <button type="submit" class="btn">Add to Basket</button>
+                        </form>
+                    <li>Spaghetti Bolognese (350 gr)..............................31 lei</li>
+                        <p>spaghetti, carne tocată de vită, ceapă, morcovi, roșii pomodoro</p>
+                        <form action="{{ url_for('add_to_basket') }}" method="POST">
+                            <input type="hidden" name="item_name" value="Spaghetti Bolognese">
+                            <input type="hidden" name="item_price" value="31">
+                            <button type="submit" class="btn">Add to Basket</button>
+                        </form>
+                </ul>
+
+            <h2>Pizza</h2>
+                <ul>
+                    <li>Margherita (28 cm).............................................21 lei</li>
+                        <p>aluat special, pomodoro, mozzarella, oregano, ulei de măsline</p>
+                        <form action="{{ url_for('add_to_basket') }}" method="POST">
+                            <input type="hidden" name="item_name" value="Margherita">
+                            <input type="hidden" name="item_price" value="21">
+                            <button type="submit" class="btn">Add to Basket</button>
+                        </form>
+                    <li>Capriciosa (28 cm)	.............................................25 lei</li>
+                        <p>aluat special, pomodoro, mozzarella, ciuperci, șuncă, măsline, oregano, ulei de măsline</p>
+                        <form action="{{ url_for('add_to_basket') }}" method="POST">
+                            <input type="hidden" name="item_name" value="Capriciosa">
+                            <input type="hidden" name="item_price" value="25">
+                            <button type="submit" class="btn">Add to Basket</button>
+                        </form>
+                    <li>Diavola (28 cm)	..................................................31 lei</li>
+                        <p>aluat special, pomodoro, mozzarela, salam, peperocino, oregano, ulei de măslie</p>
+                        <form action="{{ url_for('add_to_basket') }}" method="POST">
+                            <input type="hidden" name="item_name" value="Diavola">
+                            <input type="hidden" name="item_price" value="31">
+                            <button type="submit" class="btn">Add to Basket</button>
+                        </form>
+                </ul>
+
+            <h2>Burger</h2>
+                <ul>
+                    <li>Classic Burger - 450 gr.........................................33 lei</li>
+                        <p>salata, roșii, castraveți murați, ceapă, carne de vită, sos. garnitura nu este inclusa</p>
+                        <form action="{{ url_for('add_to_basket') }}" method="POST">
+                            <input type="hidden" name="item_name" value="Classic Burger">
+                            <input type="hidden" name="item_price" value="33">
+                            <button type="submit" class="btn">Add to Basket</button>
+                        </form>
+                    <li>Bacon cheeseburger - 450 gr.................................35 lei</li>
+                        <p>salata, roșii, castraveți murați, ceapă, muștar, bacon, cheddar, carne de vită, sos. garnitura nu este inclusa</p>
+                        <form action="{{ url_for('add_to_basket') }}" method="POST">
+                            <input type="hidden" name="item_name" value="Bacon cheeseburger">
+                            <input type="hidden" name="item_price" value="35">
+                            <button type="submit" class="btn">Add to Basket</button>
+                        </form>
+                    <li>Steak sandwich - 400 gr........................................31 lei</li>
+                        <p>vrabioară de vită, ceapă caramelizată, blue cheese, muștar. garnitura nu este inclusa</p>
+                        <form action="{{ url_for('add_to_basket') }}" method="POST">
+                            <input type="hidden" name="item_name" value="Steak sandwich">
+                            <input type="hidden" name="item_price" value="31">
+                            <button type="submit" class="btn">Add to Basket</button>
+                        </form>
+                </ul>
+        </div>
+    {% else %}
+        <div class="deny">
+        <h1>Please login or register to access the Menu</h1>
+            <a href="/login" class="btn">Login</a>
+            <a href="/register" class="btn">Register</a>
+        </div>
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Basket</title>
+    <style>
+        body {
+            font-family: Georgia, serif;
+            background-color: #f4f4f4;
+            margin: 8;
+            padding: 8;
+        }
+        .container {
+            max-width: 800px;
+            margin: 250px auto;
+            padding: 20px;
+            background-color: #e7e7e7;
+            border-radius: 10px
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1)
+            text-align: center;
+        }
+        h1 {
+            text-align: center; ;
+            color: #333;
+        }
+        p {
+            text-align: center; ;
+            color: #666;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            display: flex;
+            justify-content: space-between;  /* Space out the item name and button */
+            align-items: center;  /* Align item content vertically */
+            padding: 10px 0;
+            margin: 0 auto;  /* Center the list items */
+            max-width: 300px;  /* Limit the width of each list item */
+        }
+
+        h3 {
+            text-align: center; ;
+            color: #333;
+        }
+
+        .details {
+            margin: 50px auto;
+            text-align: center;
+        }
+
+        .btn_basket{
+            display: block;
+            margin: 10px;
+            width: 80%;
+            padding: 10px;
+            background-color: #ff8267;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .btn {
+            display: block;
+            margin: 10px auto;
+            width: 30%;
+            padding: 10px;
+            background-color: #ff8267;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .btn_basket:hover {
+            background-color: #0f9603;
+        }
+        .btn:hover {
+            background-color: #0f9603;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Your Basket</h1>
+            {% if items %}
+                <ul>
+                    {% for item in items %}
+                        <li>
+                            {{item.item_name}} - {{item.item_price}} lei
+                            <form action="{{ url_for('remove_item', item_id=item.id) }}" method="POST">
+                                <button type="submit" class="btn_basket">Remove</button>
+                            </form>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <h3>Total price: {{total_price}} lei</h3>
+                <form action="{{ url_for('place_order') }}" method="POST">
+                <div class="details">
+                    <label for="address">Address:</label>
+                    <input type="text" id="address" name="address" required>
+                    <br><br>
+                    <label for="phone_number">Phone Number:</label>
+                    <input type="text" id="phone_number" name="phone_number" required>
+                </div>
+                    <button type="submit" class="btn">Place Order</button>
+                </form>
+            {% else %}
+                <p>Your basket is empty.</p>
+            {% endif %}
+            <a href="menu" class="btn">Continue Shopping</a>
+    </div>
+</body>
+</html>

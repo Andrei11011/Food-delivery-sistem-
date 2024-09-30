@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Homepage</title>
+    <style>
+        body {
+            font-family: Georgia, serif;
+            background-color: #f4f4f4;
+            margin: 8;
+            padding: 8;
+        }
+        .container {
+            max-width: 800px;
+            margin: 250px auto;
+            padding: 20px;
+            background-color: #e7e7e7;
+            border-radius: 10px
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1)
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        p {
+            text-align: center;
+            color: #666;
+        }
+        .btn {
+            display: block;
+            margin: 20px auto;
+            width: 30%;
+            padding: 10px;
+            background-color: #ff8267;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .btn:hover {
+            background-color: #0f9603;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+         {% if logged_in %}
+            <h1>Welcome back, {{username}}</h1>
+            <a href="menu" class="btn">Menu</a>
+            <a href="history" class="btn">History</a>
+            <a href="basket" class="btn">Basket</a>
+            <a href="/logout" class="btn btn-logout">Logout</a>
+         {% else %}
+            <h1>Welcome to the Food Delivery System</h1>
+            <p>Please login or register to continue</p>
+            <a href="/login" class="btn">Login</a>
+            <a href="/register" class="btn">Register</a>
+         {% endif %}
+     </div>
+</body>
+</html>
